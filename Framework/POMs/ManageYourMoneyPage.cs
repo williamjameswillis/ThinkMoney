@@ -11,11 +11,18 @@ namespace Framework.POMs
             this.webDriver = webDriver;
         }
 
-        public string PageHeaderText => webDriver.FindElement(By.ClassName("Typography__H1-q8nsdf-0 dVUGBu")).Text;
+        public string PageHeaderText => webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/main/div[1]/div/h1")).Text;
 
         public static void ContinueToLogin(IWebDriver webDriver)
         {
-            webDriver.FindElement(By.CssSelector("#gatsby-focus-wrapper > main > div.HeaderWithImage__DesktopHeader-z0urnu-0.bZcbVv.gbi-1860889184-43b2Qhy2GZuk2oxv9Nm3k2.gatsby-image-wrapper > div > a > button")).Click();
+            try
+            {
+                webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/main/div[1]/div/a/button")).Click();
+            }
+            catch (StaleElementReferenceException)
+            {
+                webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/main/div[1]/div/a/button")).Click();
+            }
         }
     }
 }

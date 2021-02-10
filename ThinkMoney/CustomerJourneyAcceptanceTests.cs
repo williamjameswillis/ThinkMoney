@@ -61,14 +61,15 @@ namespace ThinkMoney
         public void ClickContinueToLoginSeeLoginPage()
         {
             //Given i am on the Manage your money homepage
+            HomePage.Login(webDriver);
 
             //When i click the Continue To Login button
             ManageYourMoneyPage.ContinueToLogin(webDriver);
             Helpers.SwitchToNewTab(webDriver);
 
             //Then i see the Login Page
-            LoginPage loginPage = new LoginPage(webDriver);
             Assert.Contains(partialLoginURL, webDriver.Url);
+            LoginPage loginPage = new LoginPage(webDriver);
             Assert.True(loginPage.PageHeaderText == logInText);
             Assert.True(webDriver.Title == logInTitle);
             Assert.True(loginPage.Password.Displayed);

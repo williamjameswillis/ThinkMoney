@@ -10,7 +10,7 @@ namespace Framework.Helpers
     {
         private static IWebDriver webDriver;
         private static readonly int waitSeconds = 10;
-        private static readonly string startUrl = "www.thinkmoney.co.uk";
+        private static readonly string startUrl = "https://www.thinkmoney.co.uk/";
 
         public static IWebDriver StartTest()
         {
@@ -18,6 +18,7 @@ namespace Framework.Helpers
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(waitSeconds);
             webDriver.Navigate().GoToUrl(startUrl);
             webDriver.Manage().Window.Maximize();
+            WaitFor.Small();
             webDriver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
             return webDriver;
         }
@@ -35,9 +36,9 @@ namespace Framework.Helpers
     }
     public static class WaitFor
     {
-        public static void Large()
+        public static void Small()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(250);
         }
     }
 }

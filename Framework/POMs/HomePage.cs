@@ -11,7 +11,7 @@ namespace Framework.POMs
             this.webDriver = webDriver;
         }
 
-        public string PageHeaderText => webDriver.FindElement(By.ClassName("Typography__H1-q8nsdf-0 dVUGBu")).Text;
+        public string PageHeaderText => webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/main/div[1]/div/h1")).Text;
 
         public static void OpenAccount(IWebDriver webDriver)
         {
