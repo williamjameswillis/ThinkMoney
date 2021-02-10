@@ -21,6 +21,11 @@ namespace Framework.Helpers
             return webDriver;
         }
 
+        public static void SwitchToNewTab()
+        {
+            webDriver.Quit();
+        }
+
         public static void TearDown()
         {
             webDriver.Quit();

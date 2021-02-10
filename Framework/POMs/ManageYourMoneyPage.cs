@@ -2,16 +2,16 @@
 
 namespace Framework.POMs
 {
-    public class ManageYourMoney
+    public class ManageYourMoneyPage
     {
         private readonly IWebDriver webDriver;
 
-        public ManageYourMoney(IWebDriver webDriver)
+        public ManageYourMoneyPage(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
 
-        public IWebElement PageText => webDriver.FindElement(By.ClassName("Typography__H1-q8nsdf-0 dVUGBu"));
+        public string PageHeaderText => webDriver.FindElement(By.ClassName("Typography__H1-q8nsdf-0 dVUGBu")).Text;
 
         public static void ContinueToLogin(IWebDriver webDriver)
         {
