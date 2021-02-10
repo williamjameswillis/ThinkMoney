@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -21,9 +22,9 @@ namespace Framework.Helpers
             return webDriver;
         }
 
-        public static void SwitchToNewTab()
+        public static void SwitchToNewTab(IWebDriver webDriver)
         {
-            webDriver.Quit();
+            webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
         }
 
         public static void TearDown()

@@ -12,6 +12,9 @@ namespace ThinkMoney
         private const string homePageText = "Digital banking for everyone";
         private const string manageYourMoneyURL = "https://www.thinkmoney.co.uk/current-account/online-banking/";
         private const string manageYourMoneyText = "Manage your money with online banking";
+        private const string partialLoginURL = "https://my.thinkmoney.co.uk/onlinebanking/";
+        private const string logInText = "Log In";
+        private const string logInTitle = "Login";
 
         public CustomerJourneyAcceptanceTests()
         {
@@ -61,11 +64,17 @@ namespace ThinkMoney
 
             //When i click the Continue To Login button
             ManageYourMoneyPage.ContinueToLogin(webDriver);
+            Helpers.SwitchToNewTab(webDriver);
 
-            //Then i see the Manage Your Money Page
-            ManageYourMoneyPage manageYourMoneyPage = new ManageYourMoneyPage(webDriver);
-            Assert.True(webDriver.Url == manageYourMoneyURL);
-            Assert.True(manageYourMoneyPage.PageHeaderText == manageYourMoneyText);
+            //Then i see the Login Page
+            LoginPage loginPage = new LoginPage(webDriver);
+            Assert.Contains(partialLoginURL, webDriver.Url);
+            Assert.True(loginPage.PageHeaderText == logInText);
+            Assert.True(webDriver.Title == logInTitle);
+            Assert.True(loginPage.Password.Displayed);
+            Assert.True(loginPage.Password.Enabled);
+            Assert.True(loginPage.Username.Displayed);
+            Assert.True(loginPage.Username.Enabled);
         }
     }
 }

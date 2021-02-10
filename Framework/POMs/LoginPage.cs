@@ -11,7 +11,7 @@ namespace Framework.POMs
             this.webDriver = webDriver;
         }
 
-        public IWebElement PageHeaderText => webDriver.FindElement(By.ClassName("Heading1"));
+        public string PageHeaderText => webDriver.FindElement(By.ClassName("Heading1")).Text;
 
         public IWebElement Username => webDriver.FindElement(By.Id("ThinkMoney_Theme_wt28_block_wtMainContent_OnlineBanking_CW_wt55_block_wtMainContent_OnlineBanking_CW_wt86_block_wtInputWidget_ThinkMoney_Patterns_wt52_block_wtInput_Label_wtUserNameInput"));
 
