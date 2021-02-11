@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Framework.Helpers;
 
 namespace Framework.POMs
 {
@@ -9,6 +10,8 @@ namespace Framework.POMs
         public LoginPage(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
+
+            WaitFor.VerySmall();
         }
 
         public string PageHeaderText => webDriver.FindElement(By.XPath("/html/body/form/div[3]/div[2]/div[2]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div")).Text;

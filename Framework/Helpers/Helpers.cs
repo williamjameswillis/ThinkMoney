@@ -54,6 +54,11 @@ namespace Framework.Helpers
     }
     public static class WaitFor
     {
+
+        public static void VerySmall()
+        {
+            Thread.Sleep(250);
+        }
         public static void Small()
         {
             Thread.Sleep(500);

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Framework.Helpers;
 
 namespace Framework.POMs
 {
@@ -9,14 +10,11 @@ namespace Framework.POMs
         public HomePage(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
+
+            WaitFor.VerySmall();
         }
 
         public string PageHeaderText => webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/main/div[1]/div/h1")).Text;
-
-        public static void OpenAccount(IWebDriver webDriver)
-        {
-            webDriver.FindElement(By.CssSelector("#gatsby-focus-wrapper > main > div.HeaderWithImage__DesktopHeader-z0urnu-0.bZcbVv.gbi-1208345109-9nxaEisrF1uzXgHGD4CzVm.gatsby-image-wrapper > div > a > button")).Click();
-        }
 
         public static void Login(IWebDriver webDriver)
         {
