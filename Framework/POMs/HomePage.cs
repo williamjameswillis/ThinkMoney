@@ -20,7 +20,7 @@ namespace Framework.POMs
 
         public static void Login(IWebDriver webDriver)
         {
-            webDriver.FindElement(By.CssSelector("#gatsby-focus-wrapper > header > div.DesktopHeader__Wrapper-sc-1ppbjw5-0.bNQyJS > div > div > div > nav > a > button")).Click();
+            webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/header/div[2]/div/div/div/nav/a/button")).Click();
         }
     }
 }

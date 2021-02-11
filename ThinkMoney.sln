@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThinkMoneyTests", "ThinkMoney\ThinkMoneyTests.csproj", "{B263D097-00CA-47DB-A05F-F14F70DE7E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcceptanceTests", "ThinkMoney\AcceptanceTests.csproj", "{B263D097-00CA-47DB-A05F-F14F70DE7E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{0C9D6F06-44D0-4597-9C0C-C47DB41A9D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{0C9D6F06-44D0-4597-9C0C-C47DB41A9D53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

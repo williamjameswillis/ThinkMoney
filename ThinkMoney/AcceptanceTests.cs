@@ -1,14 +1,17 @@
+using Framework;
 using Framework.Helpers;
 using Framework.POMs;
 using OpenQA.Selenium;
 using Xunit;
 
-namespace ThinkMoney
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
+
+namespace AcceptanceTests
 {
-    public class CustomerJourneyAcceptanceTests
+    [Collection("AcceptanceTests")]
+    public class AcceptanceTests
     {
         private static IWebDriver webDriver;
-        private const string homePageURL = "https://www.thinkmoney.co.uk/";
         private const string homePageText = "Digital banking for everyone";
         private const string manageYourMoneyURL = "https://www.thinkmoney.co.uk/current-account/online-banking/";
         private const string manageYourMoneyText = "Manage your money with online banking";
@@ -16,16 +19,18 @@ namespace ThinkMoney
         private const string logInText = "Log In";
         private const string logInTitle = "Login";
 
-        public CustomerJourneyAcceptanceTests()
+        public AcceptanceTests()
         {
-            webDriver = Helpers.StartTest(); //Usually would handle Startup in a constructor of a xUnit Collection Fixture - https://xunit.net/docs/shared-context#constructor 
+            webDriver = TestFixture.WebDriver;
+            Helpers.CloseNewTabAndSwitchBack(webDriver);
+            Helpers.NavigateHome(webDriver);
         }
 
         //As a Customer
         //When I visit the thinkmoney website www.thinkmoney.co.uk
         //Then I see the thinkmoney homepage
         [Fact]
-        public void ThinkMoneyHomePage()
+        public void TestHomePage()
         {
             //Given i am using a web browser
 
@@ -33,7 +38,7 @@ namespace ThinkMoney
 
             //Then i see the thinkmoney homepage
             HomePage homePage = new HomePage(webDriver);
-            Assert.True(webDriver.Url == homePageURL);
+            Assert.True(webDriver.Url == Configuration.AppSettings.Get("HomePageUrl"));
             Assert.True(homePage.PageHeaderText == homePageText);
         }
 
@@ -41,7 +46,7 @@ namespace ThinkMoney
         //When I click the login button
         //Then I see the “Manage your money” page
         [Fact]
-        public void ClickLoginSeeManageYourMoneyPage()
+        public void TestManageYourMoneyPage()
         {
             //Given i am on the thinkmoney homepage
 
@@ -58,14 +63,14 @@ namespace ThinkMoney
         //When I click the Continue To Login button
         //Then I see the Login page
         [Fact]
-        public void ClickContinueToLoginSeeLoginPage()
+        public void TestLoginPage()
         {
             //Given i am on the Manage your money homepage
             HomePage.Login(webDriver);
 
             //When i click the Continue To Login button
             ManageYourMoneyPage.ContinueToLogin(webDriver);
-            Helpers.SwitchToNewTab(webDriver);
+            Helpers.SwitchToTab(webDriver, "Last");
 
             //Then i see the Login Page
             Assert.Contains(partialLoginURL, webDriver.Url);

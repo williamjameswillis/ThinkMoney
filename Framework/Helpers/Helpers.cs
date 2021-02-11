@@ -9,26 +9,44 @@ namespace Framework.Helpers
     public static class Helpers
     {
         private static IWebDriver webDriver;
-        private static readonly int waitSeconds = 10;
-        private static readonly string startUrl = "https://www.thinkmoney.co.uk/";
 
         public static IWebDriver StartTest()
         {
             webDriver = new ChromeDriver();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(waitSeconds);
-            webDriver.Navigate().GoToUrl(startUrl);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(int.Parse(Configuration.AppSettings.Get("WaitSeconds")));
+            webDriver.Navigate().GoToUrl(Configuration.AppSettings.Get("HomePageUrl"));
             webDriver.Manage().Window.Maximize();
             WaitFor.Small();
             webDriver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
             return webDriver;
         }
-
-        public static void SwitchToNewTab(IWebDriver webDriver)
+        public static void NavigateHome(IWebDriver webDriver)
         {
+            webDriver.Navigate().GoToUrl(Configuration.AppSettings.Get("HomePageUrl"));
+        }
+
+        public static void SwitchToTab(IWebDriver webDriver, string FirstOrLast)
+        {
+            if (FirstOrLast == "First")
+            {
+                webDriver.SwitchTo().Window(webDriver.WindowHandles.First());
+            }
+            else 
             webDriver.SwitchTo().Window(webDriver.WindowHandles.Last());
         }
 
-        public static void TearDown()
+        public static void CloseNewTabAndSwitchBack(IWebDriver webDriver)
+        {
+            var tabs = webDriver.WindowHandles;
+            if (tabs.Count > 1)
+            {
+                webDriver.SwitchTo().Window(tabs[1]);
+                webDriver.Close();
+                webDriver.SwitchTo().Window(tabs[0]);
+            }
+        }
+
+        public static void TearDown(IWebDriver webDriver)
         {
             webDriver.Quit();
         }
@@ -38,7 +56,7 @@ namespace Framework.Helpers
     {
         public static void Small()
         {
-            Thread.Sleep(250);
+            Thread.Sleep(500);
         }
     }
 }
