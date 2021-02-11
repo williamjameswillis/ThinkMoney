@@ -12,12 +12,6 @@ namespace AcceptanceTests
     public class AcceptanceTests
     {
         private static IWebDriver webDriver;
-        private const string homePageText = "Digital banking for everyone";
-        private const string manageYourMoneyURL = "https://www.thinkmoney.co.uk/current-account/online-banking/";
-        private const string manageYourMoneyText = "Manage your money with online banking";
-        private const string partialLoginURL = "https://my.thinkmoney.co.uk/onlinebanking/";
-        private const string logInText = "Log In";
-        private const string logInTitle = "Login";
 
         public AcceptanceTests()
         {
@@ -38,8 +32,8 @@ namespace AcceptanceTests
 
             //Then i see the thinkmoney homepage
             HomePage homePage = new HomePage(webDriver);
-            Assert.True(webDriver.Url == Configuration.AppSettings.Get("HomePageUrl"));
-            Assert.True(homePage.PageHeaderText == homePageText);
+            Assert.True(webDriver.Url == Configuration.Get("HomePageUrl"));
+            Assert.True(homePage.PageHeaderText == AcceptanceTestData.Get("homePageText"));
         }
 
         //As a Customer
@@ -55,8 +49,8 @@ namespace AcceptanceTests
 
             //Then i see the Manage Your Money Page
             ManageYourMoneyPage manageYourMoneyPage = new ManageYourMoneyPage(webDriver);
-            Assert.True(webDriver.Url == manageYourMoneyURL);
-            Assert.True(manageYourMoneyPage.PageHeaderText == manageYourMoneyText);
+            Assert.True(webDriver.Url == AcceptanceTestData.Get("manageYourMoneyURL"));
+            Assert.True(manageYourMoneyPage.PageHeaderText == AcceptanceTestData.Get("manageYourMoneyText"));
         }
 
         //As a Customer
@@ -73,10 +67,10 @@ namespace AcceptanceTests
             Helpers.SwitchToTab(webDriver, "Last");
 
             //Then i see the Login Page
-            Assert.Contains(partialLoginURL, webDriver.Url);
+            Assert.Contains(AcceptanceTestData.Get("partialLoginURL"), webDriver.Url);
             LoginPage loginPage = new LoginPage(webDriver);
-            Assert.True(loginPage.PageHeaderText == logInText);
-            Assert.True(webDriver.Title == logInTitle);
+            Assert.True(loginPage.PageHeaderText == AcceptanceTestData.Get("logInText"));
+            Assert.True(webDriver.Title == AcceptanceTestData.Get("logInTitle"));
             Assert.True(loginPage.Password.Displayed);
             Assert.True(loginPage.Password.Enabled);
             Assert.True(loginPage.Username.Displayed);

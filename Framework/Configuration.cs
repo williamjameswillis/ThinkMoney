@@ -10,14 +10,12 @@ namespace Framework
             {"WaitSeconds", "10" }
         };
 
-        public static class AppSettings
+        public static string Get(string option)
         {
-            public static string Get(string option)
-            {
-                string result = appSettings[option];
+            string result = appSettings[option];
 
-                return result;
-            }
+            return result;
         }
+
     }
 }

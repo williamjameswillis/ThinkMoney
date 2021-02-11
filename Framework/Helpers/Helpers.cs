@@ -13,8 +13,8 @@ namespace Framework.Helpers
         public static IWebDriver StartTest()
         {
             webDriver = new ChromeDriver();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(int.Parse(Configuration.AppSettings.Get("WaitSeconds")));
-            webDriver.Navigate().GoToUrl(Configuration.AppSettings.Get("HomePageUrl"));
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(int.Parse(Configuration.Get("WaitSeconds")));
+            webDriver.Navigate().GoToUrl(Configuration.Get("HomePageUrl"));
             webDriver.Manage().Window.Maximize();
             WaitFor.Small();
             webDriver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
@@ -22,7 +22,7 @@ namespace Framework.Helpers
         }
         public static void NavigateHome(IWebDriver webDriver)
         {
-            webDriver.Navigate().GoToUrl(Configuration.AppSettings.Get("HomePageUrl"));
+            webDriver.Navigate().GoToUrl(Configuration.Get("HomePageUrl"));
         }
 
         public static void SwitchToTab(IWebDriver webDriver, string FirstOrLast)
