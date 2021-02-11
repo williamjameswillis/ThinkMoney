@@ -4,14 +4,12 @@ using Framework.POMs;
 using OpenQA.Selenium;
 using Xunit;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
-
 namespace AcceptanceTests
 {
     [Collection("AcceptanceTests")]
     public class AcceptanceTests
     {
-        private static IWebDriver webDriver;
+        private readonly IWebDriver webDriver;
 
         public AcceptanceTests()
         {
@@ -24,7 +22,7 @@ namespace AcceptanceTests
         //When I visit the thinkmoney website www.thinkmoney.co.uk
         //Then I see the thinkmoney homepage
         [Fact]
-        public void TestHomePage()
+        public void VisitWebsiteArriveAtHomePage()
         {
             //Given i am using a web browser
 
@@ -40,7 +38,7 @@ namespace AcceptanceTests
         //When I click the login button
         //Then I see the “Manage your money” page
         [Fact]
-        public void TestManageYourMoneyPage()
+        public void ClickLoginSeeManageYourMoneyPage()
         {
             //Given i am on the thinkmoney homepage
 
@@ -57,7 +55,7 @@ namespace AcceptanceTests
         //When I click the Continue To Login button
         //Then I see the Login page
         [Fact]
-        public void TestLoginPage()
+        public void ClickContinueToLoginSeeLoginPage()
         {
             //Given i am on the Manage your money homepage
             HomePage.Login(webDriver);
@@ -71,10 +69,8 @@ namespace AcceptanceTests
             LoginPage loginPage = new LoginPage(webDriver);
             Assert.True(loginPage.PageHeaderText == AcceptanceTestData.Get("logInText"));
             Assert.True(webDriver.Title == AcceptanceTestData.Get("logInTitle"));
-            Assert.True(loginPage.Password.Displayed);
-            Assert.True(loginPage.Password.Enabled);
-            Assert.True(loginPage.Username.Displayed);
-            Assert.True(loginPage.Username.Enabled);
+            Assert.True(loginPage.Password.Displayed && loginPage.Password.Enabled);
+            Assert.True(loginPage.Username.Displayed && loginPage.Username.Enabled);
         }
     }
 }

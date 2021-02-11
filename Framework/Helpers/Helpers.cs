@@ -20,6 +20,7 @@ namespace Framework.Helpers
             webDriver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
             return webDriver;
         }
+
         public static void NavigateHome(IWebDriver webDriver)
         {
             webDriver.Navigate().GoToUrl(Configuration.Get("HomePageUrl"));
@@ -50,8 +51,8 @@ namespace Framework.Helpers
         {
             webDriver.Quit();
         }
-
     }
+
     public static class WaitFor
     {
 
